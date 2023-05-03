@@ -1,0 +1,27 @@
+{
+  "Products": [
+    {
+      "Product_Name": "salt",
+      "Product_Type": "cooking salt",
+      "Quantity": "1kg",
+      "Price": "30",
+      "id": 1
+    },
+    {
+      "Product_Name": "salt",
+      "Product_Type": "cooking salt",
+      "Quantity": "ewfwef",
+      "Price": "1000",
+      "Image": "C:\\fakepath\\men3.png",
+      "id": 2
+    },
+    {
+      "Product_Name": "salt",
+      "Product_Type": "cooking salt",
+      "Quantity": "ewfwe",
+      "Price": "1000trgh",
+      "Image": "C:\\fakepath\\men1.png",
+      "id": 3
+    }
+  ]
+}
