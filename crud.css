@@ -1,0 +1,8 @@
+#bgimg{
+    background-image: url(./assets/images/bg\ light\ temp.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#whiteclr:hover{
+    color: aliceblue;
+}

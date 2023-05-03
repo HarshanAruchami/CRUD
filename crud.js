@@ -17,16 +17,16 @@ function loadTable() {
         trHTML += "<td>" + object["Price"] + "</td>";
         trHTML +=
           '<td><img width="50px" src="' +
-          object["avatar"] +
+          object["Image"] +
           '" class="avatar"></td>';
         trHTML +=
           '<td><button type="button" class="btn btn-outline-secondary ms-2" onclick="showUserEditBox(' +
           object["id"] +
-          ')">Edit</button>';
+          ')"><i class="fa-solid fa-pen-to-square text-dark " style="color: #ffffff;"></i></button>';
         trHTML +=
-          '<button type="button" class="btn btn-outline-danger ms-2" onclick="userDelete(' +
+          '<button type="button" class="btn btn-outline-secondary ms-2" onclick="userDelete(' +
           object["id"] +
-          ')">Del</button></td>';
+          ')"><i class="fa-regular fa-trash-can text-dark style="color: #ffffff;"></i></button></td>';
         trHTML += "</tr>";
       }
       document.getElementById("mytable").innerHTML = trHTML;
@@ -58,25 +58,27 @@ function userCreate() {
   const qty = document.getElementById("Quantity").value;
   const price = document.getElementById("Price").value;
   const image = document.getElementById("Image").value;
-  const xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "http://localhost:3000/Products/");
-  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  xhttp.send(
-    JSON.stringify({
-      Product_Name: pname,
-      Product_Type: ptype,
-      Quantity: qty,
-      Price: price,
-      Image: image,
-    })
-  );
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      const objects = JSON.parse(this.responseText);
-      Swal.fire(objects["message"]);
-      loadTable();
-    }
-  };
+ if (validation() == true) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:3000/Products/");
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.send(
+      JSON.stringify({
+        Product_Name: pname,
+        Product_Type: ptype,
+        Quantity: qty,
+        Price: price,
+        Image: image,
+      })
+    );
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        const objects = JSON.parse(this.responseText);
+        Swal.fire(objects["message"]);
+        loadTable();
+      }
+    };
+  }
 }
 
 function showUserEditBox(id) {
@@ -94,7 +96,7 @@ function showUserEditBox(id) {
         html:
           '<input id="id" type="hidden" value="' +
           objects[`${id}`] +
-          '">' + 
+          '">' +
           '<input id="Product_Name" class="swal2-input" placeholder="name" value="' +
           objects["Product_Name"] +
           '">' +
@@ -106,10 +108,10 @@ function showUserEditBox(id) {
           '">' +
           '<input id="Price" class="swal2-input" placeholder="price" value="' +
           objects["Price"] +
-          '">'+
+          '">' +
           '<input id="Image" class="swal2-input" placeholder="image" value="' +
           objects["Image"] +
-          '">' ,
+          '">',
         preConfirm: () => {
           userEdit(id);
         },
@@ -125,25 +127,27 @@ function userEdit(id) {
   const qty = document.getElementById("Quantity").value;
   const price = document.getElementById("Price").value;
   const image = document.getElementById("Image").value;
-  const xhttp = new XMLHttpRequest();
-  xhttp.open("PUT", `http://localhost:3000/Products/${id}`);
-  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  xhttp.send(
-    JSON.stringify({
-      Product_Name: pname,
-      Product_Type: ptype,
-      Quantity: qty,
-      Price: price,
-      Image: image
-    })
-  );
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      const objects = JSON.parse(this.responseText);
-      Swal.fire(objects["message"]);
-      loadTable();
-    }
-  };
+  if (validation() == true) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("PUT", `http://localhost:3000/Products/${id}`);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.send(
+      JSON.stringify({
+        Product_Name: pname,
+        Product_Type: ptype,
+        Quantity: qty,
+        Price: price,
+        Image: image,
+      })
+    );
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        const objects = JSON.parse(this.responseText);
+        Swal.fire(objects["message"]);
+        loadTable();
+      }
+    };
+  }
 }
 function userDelete(id) {
   console.log(id);
@@ -155,8 +159,8 @@ function userDelete(id) {
     text: "It will get deleted permanently!",
     type: "warning",
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
+    confirmButtonColor: "red",
+    cancelButtonColor: "grey",
     confirmButtonText: "Yes, delete it!",
   }).then((result) => {
     if (result.value) {
@@ -172,4 +176,51 @@ function userDelete(id) {
       };
     }
   });
+}
+function validation() {
+  const pname = document.getElementById("Product_Name").value;
+  const ptype = document.getElementById("Product_Type").value;
+  const qty = document.getElementById("Quantity").value;
+  const price = document.getElementById("Price").value;
+  //regex
+  const pnameCheck = /^[a-zA-Z\d\s]{2,20}$/;
+  const ptypeCheck = /^[a-zA-Z\d\s]{2,20}$/;
+
+  if (pname == "" || ptype == "" || qty == "" || price == "") {
+    Swal.fire({
+      title: "Fields should not be left empty",
+      showConfirmButton: true,
+      icon: "error",
+    });
+    return false;
+  }
+
+  if (!pname.match(pnameCheck)) {
+    Swal.fire({
+      title: "Invalid Input",
+      text: "Product Name can be letter or number",
+      icon: "error",
+      showConfirmButton: true,
+    });
+    return false;
+  }
+
+  if (!ptype.match(ptypeCheck)) {
+    Swal.fire({
+      title: "Invalid Input",
+      text: "Product Type can be letter or number",
+      icon: "error",
+      showConfirmButton: true,
+    });
+    return false;
+  }
+
+  if (pname.match(pnameCheck) && ptype.match(ptypeCheck)) {
+    Swal.fire({
+      title: "Successfully Created",
+      icon: "success",
+      showConfirmButton: true,
+    });
+    return true;
+  }
 }

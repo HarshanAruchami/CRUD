@@ -3,16 +3,9 @@
     {
       "Product_Name": "salt",
       "Product_Type": "cooking salt",
-      "Quantity": "1kg",
-      "Price": "30",
-      "id": 1
-    },
-    {
-      "Product_Name": "salt",
-      "Product_Type": "cooking salt",
       "Quantity": "ewfwef",
       "Price": "1000",
-      "Image": "C:\\fakepath\\men3.png",
+      "Image": "assets\\images\\men2.png",
       "id": 2
     },
     {
@@ -20,8 +13,40 @@
       "Product_Type": "cooking salt",
       "Quantity": "ewfwe",
       "Price": "1000trgh",
-      "Image": "C:\\fakepath\\men1.png",
+      "Image": "assets\\\\images\\\\men2.png",
       "id": 3
+    },
+    {
+      "Product_Name": "salt",
+      "Product_Type": "cooking salt",
+      "Quantity": "1kg",
+      "Price": "30",
+      "Image": "assets\\\\images\\\\men1.png",
+      "id": 4
+    },
+    {
+      "Product_Name": "salt",
+      "Product_Type": "cooking salt",
+      "Quantity": "1kg",
+      "Price": "30",
+      "Image": "assets\\\\images\\\\men2.png",
+      "id": 5
+    },
+    {
+      "Product_Name": "saltafwea",
+      "Product_Type": "cooking salt",
+      "Quantity": "ghtrhtr",
+      "Price": "1000",
+      "Image": "assets\\\\images\\\\men3.png",
+      "id": 9
+    },
+    {
+      "Product_Name": "salt",
+      "Product_Type": "cooking salt",
+      "Quantity": "1kg",
+      "Price": "1000",
+      "Image": "C:\\fakepath\\men2.png",
+      "id": 10
     }
   ]
 }
