@@ -1,6 +1,6 @@
-function loadTable() {
+function loadTable(Product_Name='') {
   const xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "http://localhost:3000/Products");
+  xhttp.open("GET", `http://localhost:3000/Products?Product_Name_like=${Product_Name}`);
   xhttp.send();
 
   xhttp.onreadystatechange = function () {
@@ -35,6 +35,11 @@ function loadTable() {
 }
 
 loadTable();
+// searching
+function search() {
+  const empname = document.getElementById("searchvalue").value;
+  loadTable(empname);
+}
 
 function showUserCreateBox() {
   Swal.fire({
