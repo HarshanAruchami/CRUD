@@ -85,7 +85,6 @@ function userCreate() {
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         const objects = JSON.parse(this.responseText);
-        Swal.fire(objects["message"]);
         loadTable();
       }
     };
@@ -138,7 +137,7 @@ function userEdit(id) {
   const image = document.getElementById("Image");
   const file = "assets/images/" + image.files[0].name;
 
-  if (validation() == true) {
+  if (validation2() == true) {
     const xhttp = new XMLHttpRequest();
     xhttp.open("PUT", `http://localhost:3000/Products/${id}`);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -154,7 +153,6 @@ function userEdit(id) {
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         const objects = JSON.parse(this.responseText);
-        Swal.fire(objects["message"]);
         loadTable();
       }
     };
@@ -182,11 +180,75 @@ function userDelete(id) {
       );
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
+          Swal.fire({
+            title: "Deleted successfully",
+            icon: "success",
+           
+            confirmButtonText: "Ok"
+          });
           loadTable();
         }
       };
     }
   });
+}
+function validation2() {
+  const pname = document.getElementById("Product_Name").value;
+  const ptype = document.getElementById("Product_Type").value;
+  const qty = document.getElementById("Quantity").value;
+  const price = document.getElementById("Price").value;
+  const file = document.getElementById("Image").value;
+  //regex
+  const pnameCheck = /^[a-zA-Z\d\s]{2,20}$/;
+  const ptypeCheck = /^[a-zA-Z\d\s]{2,20}$/;
+  const pqtyCheck = /^[a-zA-Z\d\s]{1,20}$/;
+
+  if (pname == "" || ptype == "" || qty == "" || price == "" || file == "") {
+    Swal.fire({
+      title: "Fields should not be left empty",
+      showConfirmButton: true,
+      icon: "error",
+    });
+    return false;
+  }
+
+  if (!pname.match(pnameCheck)) {
+    Swal.fire({
+      title: "Invalid Input",
+      text: "Product Name can be letter or number",
+      icon: "error",
+      showConfirmButton: true,
+    });
+    return false;
+  }
+
+  if (!ptype.match(ptypeCheck)) {
+    Swal.fire({
+      title: "Invalid Input",
+      text: "Product Type can be letter or number",
+      icon: "error",
+      showConfirmButton: true,
+    });
+    return false;
+  }
+  if (!qty.match(pqtyCheck)) {
+    Swal.fire({
+      title: "Invalid Input",
+      text: "Quantity can be letter or number",
+      icon: "error",
+      showConfirmButton: true,
+    });
+    return false;
+  }
+
+  if (pname.match(pnameCheck) && ptype.match(ptypeCheck)) {
+    Swal.fire({
+      title: "Successfully edited",
+      icon: "success",
+      showConfirmButton: true,
+    });
+    return true;
+  }
 }
 function validation() {
   const pname = document.getElementById("Product_Name").value;

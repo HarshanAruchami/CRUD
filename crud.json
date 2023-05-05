@@ -2,7 +2,7 @@
   "Products": [
     {
       "Product_Name": "salt",
-      "Product_Type": "Groceries",
+      "Product_Type": "Electronics",
       "Quantity": "1kg",
       "Price": "30",
       "Image": "assets/images/salt.webp",
