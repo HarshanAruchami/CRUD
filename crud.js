@@ -1,4 +1,4 @@
-//search function
+//XMLHttpRequest object creation
 function loadTable(Product_Name = "") {
   const xhttp = new XMLHttpRequest();
   xhttp.open(
@@ -11,9 +11,10 @@ function loadTable(Product_Name = "") {
     if (this.readyState == 4 && this.status == 200) {
       console.log(this.responseText);
       var trHTML = "";
-      const objects = JSON.parse(this.responseText);
+      const objects = JSON.parse(this.responseText); // >>js objects
+
       for (let object of objects) {
-        trHTML += "<tr>";
+           trHTML += "<tr>";
         trHTML += "<td>" + object["id"] + "</td>";
         trHTML += "<td>" + object["Product_Name"] + "</td>";
         trHTML += "<td>" + object["Product_Type"] + "</td>";
@@ -37,14 +38,13 @@ function loadTable(Product_Name = "") {
     }
   };
 }
-
 loadTable();
 // searching
 function search() {
-  const empname = document.getElementById("searchvalue").value;
-  loadTable(empname);
+  const proname = document.getElementById("searchvalue").value;
+  loadTable(proname);
 }
-
+//Sweet alert box for adding products [CREATE]
 function showUserCreateBox() {
   Swal.fire({
     title: "Add New Products",
@@ -75,11 +75,12 @@ function userCreate() {
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send(
       JSON.stringify({
+        // >>json string
         Product_Name: pname,
         Product_Type: ptype,
         Quantity: qty,
         Price: price,
-        Image: file,
+        Image: file
       })
     );
     xhttp.onreadystatechange = function () {
@@ -89,6 +90,7 @@ function userCreate() {
     };
   }
 }
+//Sweet alert box for editing products
 
 function showUserEditBox(id) {
   console.log(id);
@@ -97,9 +99,8 @@ function showUserEditBox(id) {
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      const objects = JSON.parse(this.responseText);
-      //const user = objects["objects"];
-      console.log(objects);
+      const objects = JSON.parse(this.responseText); // >>js objects
+      // console.log(objects);
       Swal.fire({
         title: "EDIT PRODUCTS",
         html:
@@ -128,7 +129,6 @@ function showUserEditBox(id) {
 }
 
 function userEdit(id) {
-  //const id = document.getElementById("id").value;
   const pname = document.getElementById("Product_Name").value;
   const ptype = document.getElementById("Product_Type").value;
   const qty = document.getElementById("Quantity").value;
@@ -164,6 +164,7 @@ function userDelete(id) {
   Swal.fire({
     title: "Are you sure?",
     text: "Product will get deleted permanently!",
+    icon: "warning",
     type: "warning",
     showCancelButton: true,
     confirmButtonColor: "red",
@@ -181,7 +182,7 @@ function userDelete(id) {
           Swal.fire({
             title: "Deleted successfully",
             icon: "success",
-            confirmButtonText: "Ok"
+            confirmButtonText: "Ok",
           });
           loadTable();
         }

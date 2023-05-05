@@ -2,18 +2,18 @@
   "Products": [
     {
       "Product_Name": "salt",
-      "Product_Type": "Electronics",
+      "Product_Type": "Groceries",
       "Quantity": "1kg",
       "Price": "30",
-      "Image": "assets/images/salt.webp",
+      "Image": "assets/images/watch.jfif",
       "id": 1
     },
     {
       "Product_Name": "sugar",
-      "Product_Type": "Groceries",
+      "Product_Type": "Electronics",
       "Quantity": "1kg",
       "Price": "60",
-      "Image": "assets/images/sugar-cubes.webp",
+      "Image": "assets/images/watch.jfif",
       "id": 2
     }
   ]
