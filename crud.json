@@ -1,44 +1,20 @@
 {
   "Products": [
     {
-      "Product_Name": "sugar",
-      "Product_Type": "Groceries",
-      "Quantity": "1kg",
-      "Price": "30",
-      "Image": "assets\\\\images\\\\sugar-cubes.webp",
-      "id": 1
-    },
-    {
       "Product_Name": "salt",
       "Product_Type": "Groceries",
       "Quantity": "1kg",
       "Price": "30",
-      "Image": "assets\\\\images\\\\salt.webp",
-      "id": 2
+      "Image": "assets/images/salt.webp",
+      "id": 1
     },
     {
-      "Product_Name": "induction",
-      "Product_Type": "Electronics",
-      "Quantity": "1",
-      "Price": "15000",
-      "Image": "assets/images/sugar-cubes.webp",
-      "id": 4
-    },
-    {
-      "Product_Name": "sdgd",
-      "Product_Type": "Electronics",
+      "Product_Name": "sugar",
+      "Product_Type": "Groceries",
       "Quantity": "1kg",
-      "Price": "1000",
-      "Image": "assets/images/bg light temp.webp",
-      "id": 6
-    },
-    {
-      "Product_Name": "induction",
-      "Product_Type": "Electronics",
-      "Quantity": "1",
-      "Price": "1000",
-      "Image": "assets/images/induction.jfif",
-      "id": 7
+      "Price": "60",
+      "Image": "assets/images/sugar-cubes.webp",
+      "id": 2
     }
   ]
 }

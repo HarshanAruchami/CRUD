@@ -1,3 +1,4 @@
+//search function
 function loadTable(Product_Name = "") {
   const xhttp = new XMLHttpRequest();
   xhttp.open(
@@ -66,7 +67,7 @@ function userCreate() {
   const qty = document.getElementById("Quantity").value;
   const price = document.getElementById("Price").value;
   const image = document.getElementById("Image");
-  const file = "assets/images/" + image.files[0].name
+  const file = "assets/images/" + image.files[0].name;
 
   if (validation() == true) {
     const xhttp = new XMLHttpRequest();
@@ -135,7 +136,7 @@ function userEdit(id) {
   const qty = document.getElementById("Quantity").value;
   const price = document.getElementById("Price").value;
   const image = document.getElementById("Image");
-  const file = "assets/images/" + image.files[0].name
+  const file = "assets/images/" + image.files[0].name;
 
   if (validation() == true) {
     const xhttp = new XMLHttpRequest();
@@ -166,7 +167,7 @@ function userDelete(id) {
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   Swal.fire({
     title: "Are you sure?",
-    text: "It will get deleted permanently!",
+    text: "Product will get deleted permanently!",
     type: "warning",
     showCancelButton: true,
     confirmButtonColor: "red",
@@ -192,11 +193,13 @@ function validation() {
   const ptype = document.getElementById("Product_Type").value;
   const qty = document.getElementById("Quantity").value;
   const price = document.getElementById("Price").value;
+  const file = document.getElementById("Image").value;
   //regex
   const pnameCheck = /^[a-zA-Z\d\s]{2,20}$/;
   const ptypeCheck = /^[a-zA-Z\d\s]{2,20}$/;
+  const pqtyCheck = /^[a-zA-Z\d\s]{1,20}$/;
 
-  if (pname == "" || ptype == "" || qty == "" || price == "") {
+  if (pname == "" || ptype == "" || qty == "" || price == "" || file == "") {
     Swal.fire({
       title: "Fields should not be left empty",
       showConfirmButton: true,
@@ -219,6 +222,15 @@ function validation() {
     Swal.fire({
       title: "Invalid Input",
       text: "Product Type can be letter or number",
+      icon: "error",
+      showConfirmButton: true,
+    });
+    return false;
+  }
+  if (!qty.match(pqtyCheck)) {
+    Swal.fire({
+      title: "Invalid Input",
+      text: "Quantity can be letter or number",
       icon: "error",
       showConfirmButton: true,
     });
