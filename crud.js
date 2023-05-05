@@ -84,7 +84,6 @@ function userCreate() {
     );
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        const objects = JSON.parse(this.responseText);
         loadTable();
       }
     };
@@ -152,7 +151,6 @@ function userEdit(id) {
     );
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        const objects = JSON.parse(this.responseText);
         loadTable();
       }
     };
@@ -183,7 +181,6 @@ function userDelete(id) {
           Swal.fire({
             title: "Deleted successfully",
             icon: "success",
-           
             confirmButtonText: "Ok"
           });
           loadTable();
