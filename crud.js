@@ -54,7 +54,7 @@ function showUserCreateBox() {
       '<select name="country" id="Product_Type" placeholder="Product_Type"  class="swal2-input" style="width:270px"><option value="" selected disabled> Product_Type </option><option value="Groceries">Groceries</option><option value="Electronics">Electronics</option><option value="Accessories ">Accessories</option>' +
       '<input id="Quantity" class="swal2-input" placeholder="Quantity">' +
       '<input id="Price" class="swal2-input" placeholder="Price">' +
-      '<input id="Image" class="form-control swa4l1-input mt-4" type="file" >',
+      '<input id="Image" class="form-control swa4l1-input mt-4" type="file">',
     preConfirm: () => {
       userCreate();
     },
