@@ -1,6 +1,9 @@
-function loadTable(Product_Name='') {
+function loadTable(Product_Name = "") {
   const xhttp = new XMLHttpRequest();
-  xhttp.open("GET", `http://localhost:3000/Products?Product_Name_like=${Product_Name}`);
+  xhttp.open(
+    "GET",
+    `http://localhost:3000/Products?Product_Name_like=${Product_Name}`
+  );
   xhttp.send();
 
   xhttp.onreadystatechange = function () {
@@ -47,7 +50,7 @@ function showUserCreateBox() {
     html:
       '<input id="id" type="hidden">' +
       '<input id="Product_Name" class="swal2-input" placeholder="Product_Name">' +
-      '<input id="Product_Type" class="swal2-input" placeholder="Product_Type">' +
+      '<select name="country" id="Product_Type" placeholder="Product_Type"  class="swal2-input" style="width:270px"><option value="" selected disabled> Product_Type </option><option value="Groceries">Groceries</option><option value="Electronics">Electronics</option><option value="Accessories ">Accessories</option>' +
       '<input id="Quantity" class="swal2-input" placeholder="Quantity">' +
       '<input id="Price" class="swal2-input" placeholder="Price">' +
       '<input id="Image" class="form-control swa4l1-input mt-4" type="file" >',
@@ -62,8 +65,10 @@ function userCreate() {
   const ptype = document.getElementById("Product_Type").value;
   const qty = document.getElementById("Quantity").value;
   const price = document.getElementById("Price").value;
-  const image = document.getElementById("Image").value;
- if (validation() == true) {
+  const image = document.getElementById("Image");
+  const file = "assets/images/" + image.files[0].name
+
+  if (validation() == true) {
     const xhttp = new XMLHttpRequest();
     xhttp.open("POST", "http://localhost:3000/Products/");
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -73,7 +78,7 @@ function userCreate() {
         Product_Type: ptype,
         Quantity: qty,
         Price: price,
-        Image: image,
+        Image: file,
       })
     );
     xhttp.onreadystatechange = function () {
@@ -105,16 +110,14 @@ function showUserEditBox(id) {
           '<input id="Product_Name" class="swal2-input" placeholder="name" value="' +
           objects["Product_Name"] +
           '">' +
-          '<input id="Product_Type" class="swal2-input" placeholder="type" value="' +
-          objects["Product_Type"] +
-          '">' +
+          '<select name="country" id="Product_Type" placeholder="Product_Type"  class="swal2-input" style="width:270px"><option selected disabled> Product_Type </option><option value="Groceries">Groceries</option><option value="Electronics">Electronics</option><option value="Accessories ">Accessories</option>' +
           '<input id="Quantity" class="swal2-input" placeholder="qty" value="' +
           objects["Quantity"] +
           '">' +
           '<input id="Price" class="swal2-input" placeholder="price" value="' +
           objects["Price"] +
           '">' +
-          '<input id="Image" class="swal2-input" placeholder="image" value="' +
+          '<input id="Image" type="file" class="form-control swa4l1-input mt-4" placeholder="image" value="' +
           objects["Image"] +
           '">',
         preConfirm: () => {
@@ -131,7 +134,9 @@ function userEdit(id) {
   const ptype = document.getElementById("Product_Type").value;
   const qty = document.getElementById("Quantity").value;
   const price = document.getElementById("Price").value;
-  const image = document.getElementById("Image").value;
+  const image = document.getElementById("Image");
+  const file = "assets/images/" + image.files[0].name
+
   if (validation() == true) {
     const xhttp = new XMLHttpRequest();
     xhttp.open("PUT", `http://localhost:3000/Products/${id}`);
@@ -142,7 +147,7 @@ function userEdit(id) {
         Product_Type: ptype,
         Quantity: qty,
         Price: price,
-        Image: image,
+        Image: file,
       })
     );
     xhttp.onreadystatechange = function () {
