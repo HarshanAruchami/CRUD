@@ -1,57 +1,80 @@
 //XMLHttpRequest object creation
-function loadTable(Product_Name = "") {
+function loadTable(Car_Name = "") {
   const xhttp = new XMLHttpRequest();
   xhttp.open(
     "GET",
-    `http://localhost:3000/Products?Product_Name_like=${Product_Name}`
+    `http://localhost:3000/Cars?Car_Name_like=${Car_Name}`
   );
   xhttp.send();
 
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      console.log(this.responseText);
-      var trHTML = "";
-      const objects = JSON.parse(this.responseText); // >>js objects
+  // xhttp.onreadystatechange = function () {
+  //   if (this.readyState == 4 && this.status == 200) {
+  //     console.log(this.responseText);
+  //     var trHTML = "";
+  //     const objects = JSON.parse(this.responseText); // >>js objects
 
-      for (let object of objects) {
-           trHTML += "<tr>";
-        trHTML += "<td>" + object["id"] + "</td>";
-        trHTML += "<td>" + object["Product_Name"] + "</td>";
-        trHTML += "<td>" + object["Product_Type"] + "</td>";
-        trHTML += "<td>" + object["Quantity"] + "</td>";
-        trHTML += "<td>" + object["Price"] + "</td>";
-        trHTML +=
-          '<td><img width="50px" src="' +
-          object["Image"] +
-          '" class="avatar"></td>';
-        trHTML +=
-          '<td><button type="button" class="btn btn-outline-secondary ms-2" onclick="showUserEditBox(' +
-          object["id"] +
-          ')"><i class="fa-solid fa-pen-to-square text-dark " style="color: #ffffff;"></i></button>';
-        trHTML +=
-          '<button type="button" class="btn btn-outline-secondary ms-2" onclick="userDelete(' +
-          object["id"] +
-          ')"><i class="fa-regular fa-trash-can text-dark style="color: #ffffff;"></i></button></td>';
-        trHTML += "</tr>";
+      // for (let object of objects) {
+      //   //trHTML += "<tr>";
+      //   trHTML += "<td>" + object["id"] + "</td>";
+      //   trHTML += "<td>" + object["Car_Name"] + "</td>";
+      //   trHTML += "<td>" + object["Car_Type"] + "</td>";
+      //   trHTML += "<td>" + object["Quantity"] + "</td>";
+      //   trHTML += "<td>" + object["Price"] + "</td>";
+      //   trHTML +=
+      //     '<td><img width="50px" src="' +
+      //     object["Image"] +
+      //     '" class="avatar"></td>';
+      //   trHTML +=
+      //     '<td><button type="button" class="btn btn-outline-secondary ms-2" onclick="showUserEditBox(' +
+      //     object["id"] +
+      //     ')"><i class="fa-solid fa-pen-to-square text-dark " style="color: #ffffff;"></i></button>';
+      //   trHTML +=
+      //     '<button type="button" class="btn btn-outline-secondary ms-2" onclick="userDelete(' +
+      //     object["id"] +
+      //     ')"><i class="fa-regular fa-trash-can text-dark style="color: #ffffff;"></i></button></td>';
+        //trHTML += "</tr>";
+//       }
+//       document.getElementById("mytable").innerHTML = trHTML;
+//     }
+//   };
+// }
+// loadTable();
+// searching
+//---------------------------------------------------------------------------------
+//dummy demo
+xhttp.onreadystatechange = function () {
+  if (this.readyState == 4 && this.status == 200) {
+    console.log(this.responseText);
+    var trHTML = "";
+    const objects = JSON.parse(this.responseText); // >>js objects
+
+    for (let object of objects) {
+      trHTML += '<div class="card card-body" style="width: 18px" >';
+      trHTML +=
+        '<img src="' + object["Image"] + '" class="card-img-top avatar" width="10px">';
+      trHTML += '<h5 class="card-title">' + object["Car_Name"] + "</h5>";
+      trHTML += '<p class="card-text">' + object["Price"] + "</p>";
+      trHTML += '</div>';
       }
-      document.getElementById("mytable").innerHTML = trHTML;
+      document.getElementById("card_details").innerHTML = trHTML;
     }
   };
 }
 loadTable();
-// searching
+//----------------------------------------------------------------------
+//search function
 function search() {
   const proname = document.getElementById("searchvalue").value;
   loadTable(proname);
 }
-//Sweet alert box for adding products [CREATE]
+//Sweet alert box for adding Cars [CREATE]
 function showUserCreateBox() {
   Swal.fire({
-    title: "Add New Products",
+    title: "Add New Cars",
     html:
       '<input id="id" type="hidden">' +
-      '<input id="Product_Name" class="swal2-input" placeholder="Product_Name">' +
-      '<select name="country" id="Product_Type" placeholder="Product_Type"  class="swal2-input" style="width:270px"><option value="" selected disabled> Product_Type </option><option value="Groceries">Groceries</option><option value="Electronics">Electronics</option><option value="Accessories ">Accessories</option>' +
+      '<input id="Car_Name" class="swal2-input" placeholder="Car_Name">' +
+      '<select name="country" id="Car_Type" placeholder="Car_Type"  class="swal2-input" style="width:270px"><option value="" selected disabled> Car_Type </option><option value="Groceries">Groceries</option><option value="Electronics">Electronics</option><option value="Accessories ">Accessories</option>' +
       '<input id="Quantity" class="swal2-input" placeholder="Quantity">' +
       '<input id="Price" class="swal2-input" placeholder="Price">' +
       '<input id="Image" class="form-control swa4l1-input mt-4" type="file">',
@@ -62,8 +85,8 @@ function showUserCreateBox() {
 }
 
 function userCreate() {
-  const pname = document.getElementById("Product_Name").value;
-  const ptype = document.getElementById("Product_Type").value;
+  const pname = document.getElementById("Car_Name").value;
+  const ptype = document.getElementById("Car_Type").value;
   const qty = document.getElementById("Quantity").value;
   const price = document.getElementById("Price").value;
   const image = document.getElementById("Image");
@@ -71,13 +94,13 @@ function userCreate() {
 
   if (validation() == true) {
     const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "http://localhost:3000/Products/");
+    xhttp.open("POST", "http://localhost:3000/Cars/");
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send(
       JSON.stringify({
         // >>json string
-        Product_Name: pname,
-        Product_Type: ptype,
+        Car_Name: pname,
+        Car_Type: ptype,
         Quantity: qty,
         Price: price,
         Image: file
@@ -90,27 +113,27 @@ function userCreate() {
     };
   }
 }
-//Sweet alert box for editing products
+//Sweet alert box for editing Cars
 
 function showUserEditBox(id) {
   console.log(id);
   const xhttp = new XMLHttpRequest();
-  xhttp.open("GET", `http://localhost:3000/Products/${id}`);
+  xhttp.open("GET", `http://localhost:3000/Cars/${id}`);
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       const objects = JSON.parse(this.responseText); // >>js objects
       // console.log(objects);
       Swal.fire({
-        title: "EDIT PRODUCTS",
+        title: "EDIT Cars",
         html:
           '<input id="id" type="hidden" value="' +
           objects[`${id}`] +
           '">' +
-          '<input id="Product_Name" class="swal2-input" placeholder="name" value="' +
-          objects["Product_Name"] +
+          '<input id="Car_Name" class="swal2-input" placeholder="name" value="' +
+          objects["Car_Name"] +
           '">' +
-          '<select name="country" id="Product_Type" placeholder="Product_Type"  class="swal2-input" style="width:270px"><option selected disabled> Product_Type </option><option value="Groceries">Groceries</option><option value="Electronics">Electronics</option><option value="Accessories ">Accessories</option>' +
+          '<select name="country" id="Car_Type" placeholder="Car_Type"  class="swal2-input" style="width:270px"><option selected disabled> Car_Type </option><option value="Groceries">Groceries</option><option value="Electronics">Electronics</option><option value="Accessories ">Accessories</option>' +
           '<input id="Quantity" class="swal2-input" placeholder="qty" value="' +
           objects["Quantity"] +
           '">' +
@@ -129,8 +152,8 @@ function showUserEditBox(id) {
 }
 
 function userEdit(id) {
-  const pname = document.getElementById("Product_Name").value;
-  const ptype = document.getElementById("Product_Type").value;
+  const pname = document.getElementById("Car_Name").value;
+  const ptype = document.getElementById("Car_Type").value;
   const qty = document.getElementById("Quantity").value;
   const price = document.getElementById("Price").value;
   const image = document.getElementById("Image");
@@ -138,12 +161,12 @@ function userEdit(id) {
 
   if (validation2() == true) {
     const xhttp = new XMLHttpRequest();
-    xhttp.open("PUT", `http://localhost:3000/Products/${id}`);
+    xhttp.open("PUT", `http://localhost:3000/Cars/${id}`);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send(
       JSON.stringify({
-        Product_Name: pname,
-        Product_Type: ptype,
+        Car_Name: pname,
+        Car_Type: ptype,
         Quantity: qty,
         Price: price,
         Image: file,
@@ -159,7 +182,7 @@ function userEdit(id) {
 function userDelete(id) {
   console.log(id);
   const xhttp = new XMLHttpRequest();
-  xhttp.open("DELETE", `http://localhost:3000/Products/${id}`);
+  xhttp.open("DELETE", `http://localhost:3000/Cars/${id}`);
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   Swal.fire({
     title: "Are you sure?",
@@ -191,8 +214,8 @@ function userDelete(id) {
   });
 }
 function validation2() {
-  const pname = document.getElementById("Product_Name").value;
-  const ptype = document.getElementById("Product_Type").value;
+  const pname = document.getElementById("Car_Name").value;
+  const ptype = document.getElementById("Car_Type").value;
   const qty = document.getElementById("Quantity").value;
   const price = document.getElementById("Price").value;
   const file = document.getElementById("Image").value;
@@ -249,8 +272,8 @@ function validation2() {
   }
 }
 function validation() {
-  const pname = document.getElementById("Product_Name").value;
-  const ptype = document.getElementById("Product_Type").value;
+  const pname = document.getElementById("Car_Name").value;
+  const ptype = document.getElementById("Car_Type").value;
   const qty = document.getElementById("Quantity").value;
   const price = document.getElementById("Price").value;
   const file = document.getElementById("Image").value;

@@ -1,20 +1,12 @@
 {
-  "Products": [
+  "Cars": [
     {
-      "Product_Name": "salt",
-      "Product_Type": "Groceries",
+      "Car_Name": "BMW",
+      "Car_Type": "Electronics",
       "Quantity": "1kg",
-      "Price": "30",
+      "Price": "345435",
       "Image": "assets/images/watch.jfif",
       "id": 1
-    },
-    {
-      "Product_Name": "sugar",
-      "Product_Type": "Electronics",
-      "Quantity": "1kg",
-      "Price": "60",
-      "Image": "assets/images/watch.jfif",
-      "id": 2
     }
   ]
 }
