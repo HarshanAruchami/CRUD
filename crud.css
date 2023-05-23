@@ -17,14 +17,3 @@
   position: relative;
 }
 
-#bordercolors:after {
-  position: absolute;
-  left: 50%;
-  right: 0;
-  bottom: -5px;
-  border-bottom: 5px solid rgb(35, 123, 255);
-  border-bottom-right-radius: 30%;
-  content: '';
-}
-
-#card_details

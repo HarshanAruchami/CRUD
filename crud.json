@@ -1,39 +1,11 @@
 {
   "Cars": [
     {
-      "Car_Name": "BMW",
-      "Car_Type": "Electronics",
-      "Price": "1000",
-      "Image": "assets/images/sugar-cubes.webp",
-      "id": 1
-    },
-    {
-      "Car_Name": "BMW",
-      "Car_Type": "Accessories ",
-      "Price": "1000",
-      "Image": "assets/images/salt.webp",
+      "Car_Name": "GTR",
+      "Car_Type": "Manual",
+      "Price": "200000",
+      "Image": "assets/images/gtr.jpg",
       "id": 2
-    },
-    {
-      "Car_Name": "dfthtr",
-      "Car_Type": "Electronics",
-      "Price": "1000",
-      "Image": "assets/images/sugar-cubes.webp",
-      "id": 3
-    },
-    {
-      "Car_Name": "dfthtr",
-      "Car_Type": "Electronics",
-      "Price": "1000",
-      "Image": "assets/images/induction.jfif",
-      "id": 4
-    },
-    {
-      "Car_Name": "dfthtr",
-      "Car_Type": "Accessories ",
-      "Price": "345435",
-      "Image": "assets/images/salt.webp",
-      "id": 5
     }
   ]
 }

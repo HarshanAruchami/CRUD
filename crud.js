@@ -48,7 +48,7 @@ function showUserCreateBox() {
     html:
       '<input id="id" type="hidden">' +
       '<input id="Car_Name" class="swal2-input" placeholder="Car_Name">' +
-      '<select name="country" id="Car_Type" placeholder="Car_Type"  class="swal2-input" style="width:270px"><option value="" selected disabled> Car_Type </option><option value="Groceries">Groceries</option><option value="Electronics">Electronics</option><option value="Accessories ">Accessories</option>' +
+      '<select name="country" id="Car_Type" placeholder="Car_Type"  class="swal2-input" style="width:270px"><option selected disabled> Car_Type </option><option value="Automatic">Automatic</option><option value="Manual">Manual</option>' +
       '<input id="Price" class="swal2-input" placeholder="Price">' +
       '<input id="Image" class="form-control swa4l1-input mt-4" type="file">',
     preConfirm: () => {
@@ -104,7 +104,7 @@ function showUserEditBox(id) {
           '<input id="Car_Name" class="swal2-input" placeholder="name" value="' +
           objects["Car_Name"] +
           '">' +
-          '<select name="country" id="Car_Type" placeholder="Car_Type"  class="swal2-input" style="width:270px"><option selected disabled> Car_Type </option><option value="Groceries">Groceries</option><option value="Electronics">Electronics</option><option value="Accessories ">Accessories</option>' +
+          '<select name="country" id="Car_Type" placeholder="Car_Type"  class="swal2-input" style="width:270px"><option selected disabled> Car_Type </option><option value="Automatic">Automatic</option><option value="Manual">Manual</option>' +
           '">' +
           '<input id="Price" class="swal2-input" placeholder="price" value="' +
           objects["Price"] +
@@ -188,7 +188,6 @@ function validation2() {
   //regex
   const pnameCheck = /^[a-zA-Z\d\s]{2,20}$/;
   const ptypeCheck = /^[a-zA-Z\d\s]{2,20}$/;
-  const pqtyCheck = /^[a-zA-Z\d\s]{1,20}$/;
 
   if (pname == "" || ptype == "" || price == "" || file == "") {
     Swal.fire({
