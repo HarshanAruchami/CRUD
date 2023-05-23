@@ -6,42 +6,7 @@ function loadTable(Car_Name = "") {
     `http://localhost:3000/Cars?Car_Name_like=${Car_Name}`
   );
   xhttp.send();
-
-  // xhttp.onreadystatechange = function () {
-  //   if (this.readyState == 4 && this.status == 200) {
-  //     console.log(this.responseText);
-  //     var trHTML = "";
-  //     const objects = JSON.parse(this.responseText); // >>js objects
-
-      // for (let object of objects) {
-      //   //trHTML += "<tr>";
-      //   trHTML += "<td>" + object["id"] + "</td>";
-      //   trHTML += "<td>" + object["Car_Name"] + "</td>";
-      //   trHTML += "<td>" + object["Car_Type"] + "</td>";
-      //   trHTML += "<td>" + object["Quantity"] + "</td>";
-      //   trHTML += "<td>" + object["Price"] + "</td>";
-      //   trHTML +=
-      //     '<td><img width="50px" src="' +
-      //     object["Image"] +
-      //     '" class="avatar"></td>';
-      //   trHTML +=
-      //     '<td><button type="button" class="btn btn-outline-secondary ms-2" onclick="showUserEditBox(' +
-      //     object["id"] +
-      //     ')"><i class="fa-solid fa-pen-to-square text-dark " style="color: #ffffff;"></i></button>';
-      //   trHTML +=
-      //     '<button type="button" class="btn btn-outline-secondary ms-2" onclick="userDelete(' +
-      //     object["id"] +
-      //     ')"><i class="fa-regular fa-trash-can text-dark style="color: #ffffff;"></i></button></td>';
-        //trHTML += "</tr>";
-//       }
-//       document.getElementById("mytable").innerHTML = trHTML;
-//     }
-//   };
-// }
-// loadTable();
-// searching
-//---------------------------------------------------------------------------------
-//dummy demo
+//load table
 xhttp.onreadystatechange = function () {
   if (this.readyState == 4 && this.status == 200) {
     console.log(this.responseText);
@@ -49,19 +14,28 @@ xhttp.onreadystatechange = function () {
     const objects = JSON.parse(this.responseText); // >>js objects
 
     for (let object of objects) {
-      trHTML += '<div class="card card-body" style="width: 18px" >';
+      trHTML += '<div class=" card text-dark col-3 mt-5">';
       trHTML +=
-        '<img src="' + object["Image"] + '" class="card-img-top avatar" width="10px">';
+        '<img src="' + object["Image"] + '" class="card-img-top avatar" height="160vh">';
       trHTML += '<h5 class="card-title">' + object["Car_Name"] + "</h5>";
       trHTML += '<p class="card-text">' + object["Price"] + "</p>";
+      trHTML +=
+          '<button type="button" class="btn btn-outline-secondary" onclick="showUserEditBox(' +
+          object["id"] +
+          ')"><i class="fa-solid fa-pen-to-square text-dark " style="color: #ffffff;"></i></button>';
+        trHTML +=
+          '<button type="button" class="btn btn-outline-secondary" onclick="userDelete(' +
+          object["id"] +
+          ')"><i class="fa-regular fa-trash-can text-dark style="color: #ffffff;"></i></button>';
       trHTML += '</div>';
       }
-      document.getElementById("card_details").innerHTML = trHTML;
+      document.getElementById("card_details_1").innerHTML = trHTML;
+      
     }
   };
 }
 loadTable();
-//----------------------------------------------------------------------
+
 //search function
 function search() {
   const proname = document.getElementById("searchvalue").value;
@@ -75,7 +49,6 @@ function showUserCreateBox() {
       '<input id="id" type="hidden">' +
       '<input id="Car_Name" class="swal2-input" placeholder="Car_Name">' +
       '<select name="country" id="Car_Type" placeholder="Car_Type"  class="swal2-input" style="width:270px"><option value="" selected disabled> Car_Type </option><option value="Groceries">Groceries</option><option value="Electronics">Electronics</option><option value="Accessories ">Accessories</option>' +
-      '<input id="Quantity" class="swal2-input" placeholder="Quantity">' +
       '<input id="Price" class="swal2-input" placeholder="Price">' +
       '<input id="Image" class="form-control swa4l1-input mt-4" type="file">',
     preConfirm: () => {
@@ -87,7 +60,6 @@ function showUserCreateBox() {
 function userCreate() {
   const pname = document.getElementById("Car_Name").value;
   const ptype = document.getElementById("Car_Type").value;
-  const qty = document.getElementById("Quantity").value;
   const price = document.getElementById("Price").value;
   const image = document.getElementById("Image");
   const file = "assets/images/" + image.files[0].name;
@@ -101,7 +73,6 @@ function userCreate() {
         // >>json string
         Car_Name: pname,
         Car_Type: ptype,
-        Quantity: qty,
         Price: price,
         Image: file
       })
@@ -134,8 +105,6 @@ function showUserEditBox(id) {
           objects["Car_Name"] +
           '">' +
           '<select name="country" id="Car_Type" placeholder="Car_Type"  class="swal2-input" style="width:270px"><option selected disabled> Car_Type </option><option value="Groceries">Groceries</option><option value="Electronics">Electronics</option><option value="Accessories ">Accessories</option>' +
-          '<input id="Quantity" class="swal2-input" placeholder="qty" value="' +
-          objects["Quantity"] +
           '">' +
           '<input id="Price" class="swal2-input" placeholder="price" value="' +
           objects["Price"] +
@@ -154,7 +123,6 @@ function showUserEditBox(id) {
 function userEdit(id) {
   const pname = document.getElementById("Car_Name").value;
   const ptype = document.getElementById("Car_Type").value;
-  const qty = document.getElementById("Quantity").value;
   const price = document.getElementById("Price").value;
   const image = document.getElementById("Image");
   const file = "assets/images/" + image.files[0].name;
@@ -167,7 +135,6 @@ function userEdit(id) {
       JSON.stringify({
         Car_Name: pname,
         Car_Type: ptype,
-        Quantity: qty,
         Price: price,
         Image: file,
       })
@@ -216,7 +183,6 @@ function userDelete(id) {
 function validation2() {
   const pname = document.getElementById("Car_Name").value;
   const ptype = document.getElementById("Car_Type").value;
-  const qty = document.getElementById("Quantity").value;
   const price = document.getElementById("Price").value;
   const file = document.getElementById("Image").value;
   //regex
@@ -224,7 +190,7 @@ function validation2() {
   const ptypeCheck = /^[a-zA-Z\d\s]{2,20}$/;
   const pqtyCheck = /^[a-zA-Z\d\s]{1,20}$/;
 
-  if (pname == "" || ptype == "" || qty == "" || price == "" || file == "") {
+  if (pname == "" || ptype == "" || price == "" || file == "") {
     Swal.fire({
       title: "Fields should not be left empty",
       showConfirmButton: true,
@@ -247,15 +213,6 @@ function validation2() {
     Swal.fire({
       title: "Invalid Input",
       text: "Product Type can be letter or number",
-      icon: "error",
-      showConfirmButton: true,
-    });
-    return false;
-  }
-  if (!qty.match(pqtyCheck)) {
-    Swal.fire({
-      title: "Invalid Input",
-      text: "Quantity can be letter or number",
       icon: "error",
       showConfirmButton: true,
     });
@@ -274,7 +231,6 @@ function validation2() {
 function validation() {
   const pname = document.getElementById("Car_Name").value;
   const ptype = document.getElementById("Car_Type").value;
-  const qty = document.getElementById("Quantity").value;
   const price = document.getElementById("Price").value;
   const file = document.getElementById("Image").value;
   //regex
@@ -282,7 +238,7 @@ function validation() {
   const ptypeCheck = /^[a-zA-Z\d\s]{2,20}$/;
   const pqtyCheck = /^[a-zA-Z\d\s]{1,20}$/;
 
-  if (pname == "" || ptype == "" || qty == "" || price == "" || file == "") {
+  if (pname == "" || ptype == "" || price == "" || file == "") {
     Swal.fire({
       title: "Fields should not be left empty",
       showConfirmButton: true,
@@ -310,16 +266,7 @@ function validation() {
     });
     return false;
   }
-  if (!qty.match(pqtyCheck)) {
-    Swal.fire({
-      title: "Invalid Input",
-      text: "Quantity can be letter or number",
-      icon: "error",
-      showConfirmButton: true,
-    });
-    return false;
-  }
-
+ 
   if (pname.match(pnameCheck) && ptype.match(ptypeCheck)) {
     Swal.fire({
       title: "Successfully Created",

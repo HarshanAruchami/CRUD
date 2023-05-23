@@ -3,10 +3,37 @@
     {
       "Car_Name": "BMW",
       "Car_Type": "Electronics",
-      "Quantity": "1kg",
-      "Price": "345435",
-      "Image": "assets/images/watch.jfif",
+      "Price": "1000",
+      "Image": "assets/images/sugar-cubes.webp",
       "id": 1
+    },
+    {
+      "Car_Name": "BMW",
+      "Car_Type": "Accessories ",
+      "Price": "1000",
+      "Image": "assets/images/salt.webp",
+      "id": 2
+    },
+    {
+      "Car_Name": "dfthtr",
+      "Car_Type": "Electronics",
+      "Price": "1000",
+      "Image": "assets/images/sugar-cubes.webp",
+      "id": 3
+    },
+    {
+      "Car_Name": "dfthtr",
+      "Car_Type": "Electronics",
+      "Price": "1000",
+      "Image": "assets/images/induction.jfif",
+      "id": 4
+    },
+    {
+      "Car_Name": "dfthtr",
+      "Car_Type": "Accessories ",
+      "Price": "345435",
+      "Image": "assets/images/salt.webp",
+      "id": 5
     }
   ]
 }

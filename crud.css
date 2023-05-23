@@ -1,28 +1,30 @@
-/* background image styles */
-#bgimg{
-    background-image: url(./assets/images/bg\ light\ temp.webp);
-    background-repeat: no-repeat;
-    background-size: cover;
+#searchbar {
+  width: 610px;
 }
-/* loader styles */
-.loader {
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid #000000;
-    border-bottom: 16px solid black;
-    width: 20px;
-    height: 20px;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
-    animation: spin 2s linear infinite;
+
+#searchlocation {
+  width: 240px;
+}
+.noBorders *{
+  border: none !important;
   }
-  
-  /* loader keyframes*/
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+
+#bordercolors {
+  border-top-color: cyan;
+  border-bottom: 2px solid rgb(255, 208, 0);
+  border-left: 2px solid  rgb(255, 208, 0);
+  border-right: 2px solid rgb(35, 123, 255);
+  position: relative;
+}
+
+#bordercolors:after {
+  position: absolute;
+  left: 50%;
+  right: 0;
+  bottom: -5px;
+  border-bottom: 5px solid rgb(35, 123, 255);
+  border-bottom-right-radius: 30%;
+  content: '';
+}
+
+#card_details
